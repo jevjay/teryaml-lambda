@@ -23,24 +23,24 @@ variable "lambda_source_dir" {
 }
 
 variable "lambda_source_excludes" {
-  type = list
+  type        = list(any)
   description = "Specify files to ignore when reading the Lambda source directory. Requires `lambda_source_dir` variable"
 
   default = []
 }
 
 variable "memory_size" {
-  type = number
+  type        = number
   description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128"
 
-  default     = 128
+  default = 128
 }
 
 variable "timeout" {
-  type = number
+  type        = number
   description = " Amount of time your Lambda Function has to run in seconds. Default to 3"
 
-  default     = 3
+  default = 3
 }
 
 variable "environment" {
@@ -49,7 +49,7 @@ variable "environment" {
   }))
   description = "Map of environment variables that are accessible from the function code during execution."
 
-  default     = []
+  default = []
 }
 
 variable "vpc_config" {
@@ -59,19 +59,19 @@ variable "vpc_config" {
   }))
   description = "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC"
 
-  default     = []
+  default = []
 }
 
 variable "log_retention" {
-  type = number
+  type        = number
   description = "Lambda Cloudwatch logs retention policy. Defaults to 7 days"
 
-  default     = 7
+  default = 7
 }
 
 variable "lambda_additional_policies" {
   type        = map(string)
   description = "A map, containing custom Lambda policies granting necessary permissions to the Lambda function, where key represents policy name and value is json policy"
 
-  default     = {}
+  default = {}
 }

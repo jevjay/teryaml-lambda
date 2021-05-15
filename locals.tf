@@ -3,6 +3,6 @@ locals {
 
   common_tags = {
     Application = var.name
-    Workspace = terraform.workspace
+    Workspace   = terraform.workspace
   }
 }

@@ -75,7 +75,7 @@ data "archive_file" "lambda_function_zip" {
 # A Lambda function may access to other AWS resources such as S3 bucket. So an
 # IAM role needs to be defined.
 resource "aws_iam_role" "lambda" {
-  name               = "${local.expanded_lambda_name}"
+  name               = local.expanded_lambda_name
   assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
 }
 
