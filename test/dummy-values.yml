@@ -1,0 +1,19 @@
+config:
+- name: test
+  runtime: go1.x
+  source: test/hello.go
+  handler: main
+  memory: 128
+  timeout: 3
+  variables:
+  - name: APP_NAME
+    value: test
+  vpc:
+    subnet_ids:
+      - subnet-xxx
+    security_groups:
+      - test
+  logs:
+    retention: 7
+  permissions:
+    role: test
