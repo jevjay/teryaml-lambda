@@ -2,14 +2,17 @@
 resource "aws_lambda_function" "lambda" {
   for_each = { for i in local.lambda : i.function_name => i }
 
-  function_name    = each.value.function_name
-  filename         = each.value.source
-  handler          = each.value.handler
-  source_code_hash = filebase64(each.value.source)
-  role             = aws_iam_role.lambda[each.value.function_name].arn
-  runtime          = each.value.runtime
-  memory_size      = each.value.memory
-  timeout          = each.value.timeout
+  architectures           = each.value.architectures
+  code_signing_config_arn = each.value.code_signing_config_arn
+  description             = each.value.description
+  function_name           = each.value.function_name
+  filename                = each.value.source
+  handler                 = each.value.handler
+  source_code_hash        = filebase64(each.value.source)
+  role                    = aws_iam_role.lambda[each.value.function_name].arn
+  runtime                 = each.value.runtime
+  memory_size             = each.value.memory
+  timeout                 = each.value.timeout
 
   environment {
     variables = each.value.variables
