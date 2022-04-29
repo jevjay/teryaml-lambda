@@ -1,13 +1,20 @@
 output "lambda_arn" {
   description = "Amazon Resource Name (ARN)"
   value = [
-    for function in aws_lambda_function.lambda : function.arn
+    for i in aws_lambda_function.lambda : i.arn
   ]
 }
 
 output "lambda_invoke_arn" {
   description = "ARN to be used for invoking Lambda Function from API Gateway"
   value = [
-    for function in aws_lambda_function.lambda : function.invoke_arn
+    for i in aws_lambda_function.lambda : i.invoke_arn
+  ]
+}
+
+output "lambda_id" {
+  description = "Lambda function name"
+  value = [
+    for i in local.lambda : i.function_name
   ]
 }
