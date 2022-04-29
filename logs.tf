@@ -2,10 +2,12 @@
 # This is to manage the CloudWatch Log Group for the Lambda Function.
 # If skipping this resource configuration, also add "logs:CreateLogGroup" to the IAM policy below.
 resource "aws_cloudwatch_log_group" "lambda" {
-  name              = "/aws/lambda/${local.expanded_lambda_name}"
-  retention_in_days = var.log_retention
+  for_each = { for i in local.lambda : i.function_name => i }
 
-  tags = local.common_tags
+  name              = lookup(each.value.logs[0], "group_name", null)
+  retention_in_days = lookup(each.value.logs[0], "retention", null)
+
+  tags = local.tags
 }
 
 data "aws_iam_policy_document" "lambda_logging" {
@@ -24,14 +26,20 @@ data "aws_iam_policy_document" "lambda_logging" {
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
 resource "aws_iam_policy" "lambda_logging" {
-  name        = "${local.expanded_lambda_name}-logging"
-  path        = "/"
+  for_each = { for i in local.lambda : i.function_name => i }
+
+  name        = "${each.value.function_name}-logging"
+  path        = lookup(each.value.permissions[0], "path", null)
   description = "IAM policy for logging from a lambda"
 
   policy = data.aws_iam_policy_document.lambda_logging.json
+
+  tags = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role       = aws_iam_role.lambda.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
+  for_each = { for i in local.lambda : i.function_name => i }
+
+  role       = aws_iam_role.lambda[each.value.function_name].name
+  policy_arn = aws_iam_policy.lambda_logging[each.value.function_name].arn
 }
