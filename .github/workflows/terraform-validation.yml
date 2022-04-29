@@ -1,4 +1,8 @@
-name: 'Terraform'
+name: 'Terraform validation'
+
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: read # required to checkout the code from the repo
 
 on:
   pull_request:
