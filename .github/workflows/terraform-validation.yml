@@ -43,7 +43,7 @@ jobs:
     - name: Configure aws session
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/terrabits-iam-access
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/terrabits-lambda-access
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: ${{ secrets.AWS_REGION }}
     
