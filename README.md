@@ -1,6 +1,6 @@
-![Terrabits logo](./img/terrabits-logo.png)
+![tbits logo](./img/tbits-logo.png)
 
-# terraforest-lambda
+# tbits-lambda
 
 Terraform module for AWS Lambda function and its supporting resources.
 
@@ -10,7 +10,7 @@ Create a simple AWS Lambda function
 
 ```hcl
 module "codecommit_job" {
-  source  = "github.com/jevjay/terraforest-lambda"
+  source  = "github.com/jevjay/tbits-lambda"
 
   config = "path/to/configuration"
   shared_tags = {
