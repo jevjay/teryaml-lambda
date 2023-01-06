@@ -1,6 +1,6 @@
-![tbits logo](./img/tbits-logo.png)
+![teryaml logo](./img/tbits-logo.png)
 
-# tbits-lambda
+# teryaml-lambda
 
 Terraform module for AWS Lambda function and its supporting resources.
 
